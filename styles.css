@@ -1,0 +1,22 @@
+:root {
+  --green: #73AD21;
+  --myCyan: #22AACC;
+}
+
+h1 {
+  text-align: center;
+  background-color: var(--myCyan);
+  margin: 0;
+  padding-top: 10px;
+  color: #111111;
+}
+#GameBorder {
+  margin: auto;
+  width: fit-content;
+  border: 10px solid var(--myCyan);
+}
+#GameContainer {
+  margin: auto;
+  width: fit-content;
+  border: 5px solid #000000;
+}
