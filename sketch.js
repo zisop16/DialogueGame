@@ -7,7 +7,7 @@ function setup() {
   // let width = 500;
   // let height = 500;
 
-  CANVAS = createCanvas(500, 500);
+  CANVAS = createCanvas(1000, 800);
   CANVAS.parent("#GameBorder");
   SOFIA = loadFont('fonts/Sofia-Regular.otf');
   testRect = new TextButton();
