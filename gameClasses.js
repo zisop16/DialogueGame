@@ -10,6 +10,35 @@ class Color {
   }
 }
 
+class TextButton {
+  constructor() {
+    this.rectX = 150;
+    this.rectY = 200;
+    this.rectW = 200;
+    this.rectH = 200;
+    this.rectCR = 20;
+    this.textSize = 20;
+    this.textMargin = 10;
+    this.text = "the text algorithmically fits within the box using a function";
+    this.textColor = CYAN;
+    this.rectColor = RED;
+    this.onclick = () => {};
+  }
+  draw() {
+    push();
+    this.rectColor.fill();
+    rect(this.rectX, this.rectY, this.rectW, this.rectH, this.rectCR);
+    this.textColor.fill();
+    textFont(SOFIA);
+    textSize(this.textSize);
+    textAlign(CENTER, TOP);
+    let adjWidth = this.rectW - this.textMargin * 2;
+    let adjText = adjustedText(this.text, adjWidth, this.textSize);
+    text(adjText, this.rectX, this.rectY - this.rectH / 2 + this.textMargin);
+    pop();
+  }
+}
+
 function adjustedText(initialText, width, fontSize) {
   if (fontSize * 1.5 > width) {
     throw `Font size: ${fontSize} too big for width: ${width}`
@@ -77,34 +106,6 @@ function adjustedText(initialText, width, fontSize) {
   newText = newText.substring(0, newText.length - 1);
   pop();
   return newText;
-}
-
-class TextButton {
-  constructor() {
-    this.rectX = 100;
-    this.rectY = 200;
-    this.rectW = 200;
-    this.rectH = 150;
-    this.rectCR = 20;
-    this.textSize = 20;
-    this.textMargin = 10;
-    this.text = "the text algorithmically fits within the box using a function";
-    this.textColor = CYAN;
-    this.rectColor = DARK_RED;
-  }
-  draw() {
-    push();
-    this.rectColor.fill();
-    rect(this.rectX, this.rectY, this.rectW, this.rectH, this.rectCR);
-    this.textColor.fill();
-    textFont(SOFIA);
-    textSize(this.textSize);
-    textAlign(CENTER, TOP);
-    let adjWidth = this.rectW - this.textMargin * 2;
-    let adjText = adjustedText(this.text, adjWidth, this.textSize);
-    text(adjText, this.rectX, this.rectY - this.rectH / 2 + this.textMargin);
-    pop();
-  }
 }
 
 const CYAN = new Color(0, 200, 200);

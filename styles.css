@@ -1,6 +1,7 @@
 :root {
   --green: #73AD21;
   --myCyan: #22AACC;
+  --darkRed: #AA0022;
 }
 
 h1 {
@@ -19,4 +20,25 @@ h1 {
   margin: auto;
   width: fit-content;
   border: 5px solid #000000;
+}
+
+#LoginContainer {
+  border: 3px solid #f1f1f1;
+  width: fit-content;
+  margin: auto;
+  text-align: center;
+  padding: 10px;
+  background-color: lightgrey;
+}
+#UsernameLabel {
+  color: var(--darkRed);
+}
+#LoginFormSpacing {
+  padding-bottom: 10px;
+}
+#LoginButtonContainer {
+  padding-top: 10px;
+}
+#UsernameLabelContainer {
+  padding-bottom: 10px;
 }
