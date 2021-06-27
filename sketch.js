@@ -1,16 +1,29 @@
 let SOFIA;
 let CANVAS;
 let testRect;
+let optionList = [];
+
+let loggedIn = false;
+let progressString = "";
 
 let LOGINBUTTON;
 let shouldLogin = false;
 
+let clicked = false;
+let unclicked = false;
+function mousePressed() {
+  clicked = true;
+}
+function mouseReleased() {
+  unclicked = true;
+}
+
 function setup() {
   // Width and Height variables are automatically initialized
   // let width = 1000;
-  // let height = 800;
+  // let height = 600;
 
-  CANVAS = createCanvas(1000, 800);
+  CANVAS = createCanvas(1000, 600);
   CANVAS.parent("#GameBorder");
   SOFIA = loadFont('fonts/Sofia-Regular.otf');
   testRect = new TextButton();
@@ -39,4 +52,11 @@ function draw() {
 
   fill(255, 255, 0);
   rect(50, 50, 50, 50);
+  resetVariables();
+}
+
+function resetVariables() {
+  clicked = false;
+  unclicked = false;
+  resetClickables();
 }

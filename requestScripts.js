@@ -7,7 +7,7 @@ function login() {
   if (res["Error"]) {
     let err = res["Error"];
     if (err.includes("is not registered")) {
-
+      let res = createUser(username);
     }
     else {
       console.log(err);
@@ -25,7 +25,6 @@ function login() {
   else {
     errorDiv.innerHTML = "";
     let gameData = res["Info"]["Decisions"];
-    console.log(gameData);
   }
 }
 
@@ -35,8 +34,7 @@ function createUser(username) {
     "Username": username,
     "Decisions": NEW_USER_DECISIONS
   };
-  let res = postInfo(STORAGE_API, paramsObj);
-  let message = res["message"];
+  return postInfo(STORAGE_API, paramsObj);
 }
 
 function postInfo(url, paramsObj) {

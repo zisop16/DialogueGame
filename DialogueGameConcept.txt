@@ -1,0 +1,11 @@
+optionList carries a list of dialogue
+
+i want to press A->M and go to the same result gameState as B->Q
+optionList on screen is a function of gameState variable
+
+each option pressed carries a function to change gameState
+
+characters carry dialogue associated with each gameState
+
+game carries a memory of decisions, 
+gameState from option selected is a function of past decisions

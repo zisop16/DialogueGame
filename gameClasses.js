@@ -8,10 +8,47 @@ class Color {
   fill() {
     fill(this.r, this.g, this.b, this.a);
   }
+  multiply(val) {
+    return new Color(this.r * val, this.g * val, this.b * val, this.a);
+  }
+  toString() {
+    return `${this.r}, ${this.g}, ${this.b}, ${this.a}`;
+  }
 }
 
-class TextButton {
+allClickables = [];
+class Clickable {
   constructor() {
+    this.clicked = false;
+    this.clickEvaluated = false;
+    allClickables.push(this);
+  }
+  get Clicked() {
+    if (!this.clickEvaluated) {
+      this.clicked = this.hovered() && clicked;
+      this.clickEvaluated = true;
+    }
+    return this.clicked;
+  }
+  hovered() {
+    throw "Must implement boolean hovered function in Clickable";
+  }
+}
+function resetClickables() {
+  for (let clickable of allClickables) {
+    clickable.clicked = false;
+    clickable.clickEvaluated = false;
+  }
+}
+
+const CYAN = new Color(0, 200, 200);
+const RED = new Color(255, 0, 0);
+const DARK_RED = new Color(200, 20, 0);
+
+const HOVER_COLOR_MULTIPLIER = .9;
+class TextButton extends Clickable {
+  constructor() {
+    super();
     this.rectX = 150;
     this.rectY = 200;
     this.rectW = 200;
@@ -21,12 +58,24 @@ class TextButton {
     this.textMargin = 10;
     this.text = "the text algorithmically fits within the box using a function";
     this.textColor = CYAN;
-    this.rectColor = RED;
-    this.onclick = () => {};
+    this.RectColor = DARK_RED;
+  }
+  set RectColor(color) {
+    this.rectColor = color;
+    this.rectHoverColor = color.multiply(HOVER_COLOR_MULTIPLIER);
+  }
+  onclick() {
+    //Should be implemented in subclasses
   }
   draw() {
     push();
-    this.rectColor.fill();
+    let hovered = this.hovered();
+    if (hovered) {
+      this.rectHoverColor.fill();
+    }
+    else {
+      this.rectColor.fill();
+    }
     rect(this.rectX, this.rectY, this.rectW, this.rectH, this.rectCR);
     this.textColor.fill();
     textFont(SOFIA);
@@ -37,77 +86,10 @@ class TextButton {
     text(adjText, this.rectX, this.rectY - this.rectH / 2 + this.textMargin);
     pop();
   }
+  hovered() {
+    return pointInRect(this.rectX, this.rectY, this.rectW, this.rectH, {
+      x: mouseX,
+      y: mouseY
+    });
+  }
 }
-
-function adjustedText(initialText, width, fontSize) {
-  if (fontSize * 1.5 > width) {
-    throw `Font size: ${fontSize} too big for width: ${width}`
-  }
-  if (initialText === "") {return "";}
-  push();
-  textSize(fontSize);
-  let newText = "";
-  let lines = [""];
-  let lineInd = 0;
-  let shouldContinue = true;
-  while (shouldContinue) {
-    let wordInd = initialText.indexOf(' ');
-    if (wordInd == -1) {
-      wordInd = initialText.length;
-      shouldContinue = false;
-    }
-    let currentWord = initialText.substring(0, wordInd);
-    initialText = initialText.substring(wordInd + 1, initialText.length);
-    if (textWidth(currentWord) > width) {
-      let nextLine = "";
-      let addRemaining = true;
-      for (let i = 0; i < currentWord.length; i++) {
-        let test = nextLine;
-        test += currentWord.charAt(i);
-        if (textWidth(test) > width) {
-          if (lines[lineInd] === "") {
-            lines[lineInd] = nextLine;
-          }
-          else {
-            lines.push(nextLine);
-            lineInd += 1;
-          }
-          nextLine = currentWord.charAt(i);
-        }
-        else {
-          nextLine = test;
-        }
-      }
-      lines.push(nextLine);
-      lineInd += 1;
-    }
-    else {
-      let currentLine = lines[lineInd];
-      let addedText;
-      if (currentLine === "") {
-        addedText = currentWord;
-      }
-      else {
-        addedText = ` ${currentWord}`;
-      }
-      currentLine += addedText;
-      if (textWidth(currentLine) > width) {
-        lines.push(`${currentWord}`)
-        lineInd += 1;
-      }
-      else {
-        lines[lineInd] += addedText;
-      }
-    }
-  }
-  for (let line of lines) {
-    newText += `${line}\n`;
-  }
-  newText = newText.substring(0, newText.length - 1);
-  pop();
-  return newText;
-}
-
-const CYAN = new Color(0, 200, 200);
-const RED = new Color(255, 0, 0);
-const DARK_RED = new Color(200, 20, 0);
