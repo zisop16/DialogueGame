@@ -6,7 +6,16 @@ function pointInRect(x, y, w, h, p) {
   let xBounds = p.x >= leftX && p.x <= rightX;
   let yBounds = p.y >= topY && p.y <= botY;
   return xBounds && yBounds;
+}
 
+function countChar(text, char) {
+  let count = 0;
+  for (let i = 0; i < text.length; i++) {
+    if (text.charAt(i) === char) {
+      count++;
+    }
+  }
+  return count;
 }
 
 function adjustedText(initialText, width, fontSize) {

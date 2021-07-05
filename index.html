@@ -8,35 +8,35 @@
     <script src="libs/p5.sound.js"></script>
 
     <script src="requestScripts.js"></script>
-    <script src="associations.js"></script>
     <script src="utils.js"></script>
     <script src="gameClasses.js"></script>
-    <script src="dialogueGame.js"></script>
-
+    <script src="gameText.js"></script>
 
   </head>
   <body>
-    <div id="LoginFormSpacing">
-      <div id="LoginContainer">
-        <div id="UsernameErrorContainer">
-        </div>
-        <div id="UsernameLabelContainer">
-          <label for="Username" id="UsernameLabel">Username:</label><br>
-        </div>
-        <input id="Username" type="text" placeholder="Enter Username"></input><br>
-        <div id="LoginButtonContainer">
-          <button id="LoginButton">Log In</button>
-        </div>
-        <div id="LoginInfoContainer">
+    <div id="EntirePage">
+      <div id="LoginFormSpacing">
+        <div id="LoginContainer">
+          <div id="UsernameErrorContainer">
+          </div>
+          <div id="UsernameLabelContainer">
+            <label for="Username" id="UsernameLabel">Username:</label><br>
+          </div>
+          <input id="Username" type="text" placeholder="Enter Username"></input><br>
+          <div id="LoginButtonContainer">
+            <button id="LoginButton">Log In</button>
+          </div>
+          <div id="LoginInfoContainer">
+          </div>
         </div>
       </div>
-    </div>
-    <div id="GameContainer">
-      <h1>Entertaining<br>Dialogue Game</h1>
-      <div id="GameBorder" class="center">
-        <!-- The sketch isn't actually contained within the div. This must be
-          set up inside the sketch.js setup -->
-        <script src="sketch.js"></script>
+      <div id="GameContainer">
+        <h1>Entertaining<br>Dialogue Game</h1>
+        <div id="GameBorder" class="center">
+          <!-- The sketch isn't actually contained within the div. This must be
+            set up inside the sketch.js setup -->
+          <script src="sketch.js"></script>
+        </div>
       </div>
     </div>
   </body>
